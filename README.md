@@ -1,57 +1,13 @@
-# link-to-leak
+This reproduces a "bug" (or at least a difference in handling) between FastBoot-rendered markup and non-FastBoot-rendered markup when `LinkTo` components are nested. This is new behavior, but I didn't isolate exactly which version of Ember it appeared in.
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+TL;DR The nested link to is rendered outside of its parent in FastBoot, but not when FastBoot is disabled.
 
-## Prerequisites
+```
+<LinkTo @route="application" style="font-weight: bold;">
+  <LinkTo @route="application">
+    I should be bold because I should be nested in the other anchor.
+  </LinkTo>
+</LinkTo>
+```
 
-You will need the following things properly installed on your computer.
-
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
-
-## Installation
-
-* `git clone <repository-url>` this repository
-* `cd link-to-leak`
-* `npm install`
-
-## Running / Development
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+Yes, yes... [nested anchor tags](https://www.w3.org/TR/html401/struct/links.html#h-12.2.2) are illegal, and so maybe this isn't a bug, but the difference is unexpected, and so maybe it is.
