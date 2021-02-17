@@ -1,6 +1,6 @@
 This reproduces a "bug" (or at least a difference in handling) between FastBoot-rendered markup and non-FastBoot-rendered markup when `LinkTo` components are nested. This is new behavior, but I didn't isolate exactly which version of Ember it appeared in.
 
-TL;DR The nested link to is rendered outside of its parent in FastBoot, but not when FastBoot is disabled.
+**TL;DR The nested link to is rendered outside of its parent in FastBoot, but not when FastBoot is disabled.**
 
 ```
 <LinkTo @route="application" style="font-weight: bold;">
