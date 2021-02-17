@@ -1,7 +1,5 @@
-{{page-title "LinkToLeak"}}
-
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+<LinkTo @route="application" style="font-weight: bold;">
+  <LinkTo @route="application">
+    I should be bold because I should be nested in the other anchor.
+  </LinkTo>
+</LinkTo>
